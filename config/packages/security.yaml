@@ -2,6 +2,8 @@ security:
     encoders:
         App\Entity\Utilisateur:
             algorithm: bcrypt
+        App\Entity\Administrateur:
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
@@ -13,6 +15,10 @@ security:
                 entity:
                     class: App\Entity\Enqueteur
                     property: email
+        logAdmin:
+            entity:
+                class: App\Entity\Administrateur
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -32,11 +38,21 @@ security:
             lazy: true
             provider: logEnqueteur
             form_login:
-                login_path: loginE
-                check_path: loginE
+                login_path: login
+                check_path: login
             logout:
-                path: logoutE
-                target: loginE
+                path: logout
+                target: login
+        main_Admin:
+            anonymous: true
+            lazy: true
+            provider: logAdmin
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: logout
+                target: login
 
 
             # activate different ways to authenticate

@@ -205,13 +205,13 @@ public function updateEnqueteur(Enqueteur $enqueteur,Request $req){
         return $this->redirectToRoute("login");
     }
  /**
-     * @Route("/connexion_enqueteur",name="loginE")
+     * @Route("/connexion",name="login")
      */
     public function loginEnqueteur(){
         return $this->render("Enqueteur/login.html.twig");
     }
     /**
-     * @Route("/logoutEnqueteur",name="logoutE")
+     * @Route("/logoutEnqueteur",name="logout")
      */
     public function logoutEnqueteur(){
         return $this->redirectToRoute("loginE");

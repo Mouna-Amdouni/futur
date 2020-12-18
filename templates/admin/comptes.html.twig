@@ -1,0 +1,105 @@
+{% block body %}
+<h1>La listes des comptes : </h1>
+<h2>La liste des sonés</h2>
+{% for sonde in users %}
+    <div>
+    <h3>sonde {{loop.index}}</h3>
+    <table>
+    <tr>
+    <th>id</th>
+    <th>nom</th>
+    <th>prénom</th>
+    <th>date de naissance</th>
+    <th>email</th>
+    <th>tel</th>
+    <th>genre</th>
+    <th>adresse</th>
+    <th>cin</th>
+    <th>photo</th>
+    </tr>
+    <tr>
+    <td>{{sonde.id}}</td>
+    <td>{{sonde.nom}} </td>
+    <td>{{sonde.prenom}}</td>
+    <td>{{sonde.dateNaissance|date('m/d/Y')}}</td>
+    <td>{{sonde.email}}</td>
+    <td>{{sonde.tel}}</td>
+    <td>
+    {% if sonde.genre == 1 %}
+    Homme
+    {% else %}
+    Femme
+    {% endif %}
+    
+    </td>
+    <td>{{sonde.adresse}}</td>
+    <td>{{sonde.cin}}</td>
+    <td>
+    {% if sonde.photo %}
+    <img src="getimage({{'sonde.photo'}}) "/>
+    {% else %}
+    pas de photo
+    {% endif %}
+    
+    </td>
+    </tr>
+    </table>*
+    <button ><a href="{{path('updateutilisateur',{'id':sonde})}}">modifier</a></button>
+    <button><a href="{{path('deleteUser',{'id':sonde})}}">supprimer</a></button>
+    </div>
+{% endfor %}
+<h2>La liste des enqueteurs</h2>
+{% for enqueteur in enqueteurs %}
+    <div>
+    <h3> enqueteur {{loop.index}}</h3>
+    <table>
+    <tr>
+    <th>id</th>
+    <th>nom</th>
+    <th>prénom</th>
+    <th>date de naissance</th>
+    <th>email</th>
+    <th>tel</th>
+    <th>matricule fiscale</th>
+    <th>registre des commerces</th>
+    <th>adresse société</th>
+    <th>logo</th>
+    <th>genre</th>
+    <th>cin</th>
+    </tr>
+    <tr>
+    <td>{{enqueteur.id}}</td>
+    <td>{{enqueteur.nom}}</td>
+    <td>{{enqueteur.prenom}}</td>
+    <td>{{enqueteur.dateNaissance|date('d/m/Y')}}</td>
+    <td>{{enqueteur.email}}</td>
+    <td>{{enqueteur.tel}}</td>
+    <td>{{enqueteur.matriculeFiscale}}</td>
+    <td>
+    {% if enqueteur.registreDesCommeerces %}
+    <img src="{{'enqueteur.registreDesCommeerces'}}" />
+    {% else %}
+        L'image  n'est pas disponible !
+    {% endif %}
+    
+    </td>
+    <td>{{enqueteur.adresseSociete}}</td>
+    <td>{% if enqueteur.logo %}
+    <img src="{{'enqueteur.logo'}}" />
+    {% else %}
+        l'image n'est pas disponible
+    {% endif %}
+    </td>
+    <td> {% if enqueteur.genre == 1 %}
+    Homme
+    {% else %}
+    Femme
+    {% endif %}</td>
+    <td>{{enqueteur.cin}}</td>
+    </tr>
+    </table>
+    <button><a href="{{path('updateEnqueteur',{'id':enqueteur})}}">modifier</a></button>
+    <button><a href="{{path('deleteEnqueteur',{'id':enqueteur})}}">supprimer</a></button>
+    </div>
+{% endfor %}
+{% endblock %}
